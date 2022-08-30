@@ -26,3 +26,19 @@ Agente.prototype.constructor=Agente;
 const brown=new Agente('Brown');
 
 brown.saluda();
+
+//Herencia múltiple ----------------------
+function Superheroe(){
+    this.vuela=function() {
+      console.log(`${this.nombre} vuela`);
+    }
+    this.esquivaBalas=function(){
+      console.log(`${this.nombre} esquiva balas`);
+    }
+}
+
+// copiamos todas las propiedades de Superheroe al prototipo de Agente
+Object.assign(Agente.prototype, new Superheroe());
+
+brown.vuela();
+brown.esquivaBalas();
