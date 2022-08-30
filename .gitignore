@@ -105,3 +105,4 @@ dist
 
 # Temporales de archivos word
 .~lock*
+.vscode/

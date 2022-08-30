@@ -24,14 +24,13 @@ function serie(cb, times){
 
 //Función del profesor
 //llamar a al función fn, n veces, en serie, y un callback de terminación
-function serie(fn, n, callbackTerminacion) {
-  if (n==0) {
+function serie(arr, fn, callbackTerminacion) {
+  if (arr.length==0) {
     callbackTerminacion();
     return;
   }
-  n=n-1;
-  fn(`Texto ${n}`, function() {
-    serie(fn, n, callbackTerminacion);
+  fn(`Texto ${arr.shift()}`, function() {
+    serie(arr, fn, callbackTerminacion);
   })
 }
 
@@ -40,4 +39,4 @@ escribeTras2Segundos('Texto 1', function(){
   //console.log('termino');
 });
 */
-serie(escribeTras2Segundos,6, function(){console.log(`Termino`)});
+serie([1,2,3,4,5,6], escribeTras2Segundos,function(){console.log(`Termino`)});
