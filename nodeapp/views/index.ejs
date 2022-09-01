@@ -7,5 +7,19 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <p>El color es <%= color %></p>
+    <h2><%=bienvenido %></h2>
+    <p>Inyección de código: <%- codigo %></p>
+    <h3>Segundos: <%= segundoActual %></h3>
+    <% if (condicion) { %>
+      <p>Segundos pares</p>
+    <% } else { %>
+      <p>Segundos impares</p>
+    <% } %>
+    <p>Usuarios</p>
+    <% usuarios.forEach(usuario => { %>
+      <p><%= usuario.nombre %> tiene <%= usuario.edad %></p>
+    <% }) %>
+
   </body>
 </html>
