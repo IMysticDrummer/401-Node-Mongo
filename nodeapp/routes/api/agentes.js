@@ -9,3 +9,5 @@ router.get('/', (req, res, next) => {
 
   res.json({results: agentes});
 });
+
+module.exports=router;

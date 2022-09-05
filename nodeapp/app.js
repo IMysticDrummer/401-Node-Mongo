@@ -22,6 +22,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/**
+ * Rutas del API
+ */
+ app.use('/api/agentes', require('./routes/api/agentes'));
+
+ /**
+  * Rutas del Website
+  */
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -32,6 +40,15 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  // comprobar si es un error de validación
+  if (err.array) {
+    err.status = 422; // error de validación
+    const errorInfo = err.array({ onlyFirstError: true })[0];
+    console.log(errorInfo);
+    err.message = `Error in ${errorInfo.location}, param "${errorInfo.param}" ${errorInfo.msg}`;
+  }
+
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
