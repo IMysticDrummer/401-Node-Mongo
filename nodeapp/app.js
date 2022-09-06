@@ -16,6 +16,8 @@ app.set('view engine', 'ejs');
 //Integración de variables globales
 app.locals.title="Anuncios"; //Ahora tenemos que adaptarlo en el middleware
 
+require('./lib/connectMongoose');
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
