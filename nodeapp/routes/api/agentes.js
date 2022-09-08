@@ -5,18 +5,38 @@ const Agente=require('../../models/Agente');
 
 //GET /api/agentes
 //Devuelve una lista de agentes
-router.get('/', async (req, res, next) => {
+/*router.get('/', async (req, res, next) => {
   /*const agentes= [
     {name: 'Jones', age: 41},
     {name: 'Brown', age: 22}
   ];*/
-  try{
+/*  try{
     const agentes= await Agente.find();
   } catch (err) {
     next(err);
   }
 
   res.json({results: agentes});
+});
+*/
+router.get('/', async (req, res, next) => {
+  try {
+
+    //Usamos un método estático creado por nosotros en el 
+    //modelo, en vel del método normal.
+    //const agentes = await Agente.find();
+
+    filtro={};
+    const name=req.query.name;
+    const age=req.query.age;
+    if (name) {filtro.name=name}
+    if (age) {filtro.age=age}
+    const agentes = await Agente.lista(filtro);
+    res.json({ results: agentes });
+
+  } catch (err) {
+    next(err);
+  }
 });
 
 //Vamos a validar datos
@@ -65,5 +85,45 @@ router.put('/:id', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-})
+});
+
+
+//POST /api/agentes (body)
+//Crea un agente
+router.post('/', async (req,res,next) => {
+  try {
+    const agenteData=req.body;
+
+    //OJO esto lo crea en memoria
+    const agente=new Agente(agenteData); 
+
+    console.log(`La edad de ${agente.name} es par?: ,${agente.edadEsPar()}`);
+
+    //ahora lo guardamos en la base de datos
+    const agenteGuarddo= await agente.save();
+
+    res.json({result: agenteGuarddo});
+
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+//DELETE /api/agentes/:_id
+//Eliminar un agente
+router.delete('/:id', async (req, res, next) => {
+
+  try {
+    const _id=req.params.id;
+
+    await Agente.deleteOne({_id: _id});
+
+    //Sólo respondemos código 200, porque es una eliminación
+    res.json();
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports=router;
