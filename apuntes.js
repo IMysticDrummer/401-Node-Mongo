@@ -23,4 +23,11 @@
   SCRIPT INICIALIZACIÓN BASE DE DATOS MONGO
   Esto no es parte de la aplicación. Va a funcionar de foerma
   autónoma, aunque esté en la misma carpeta.
+
+
+  DOCUMENTACION DE PROYECTOS
+  Ver mashery/iodocs
+
+  También se usa swagger(trabaja con openapi --> herramienta swagger editor), openapi.
+
  */
