@@ -3,6 +3,7 @@ const router = express.Router();
 const {query, validationResult} = require('express-validator');
 const Agente=require('../../models/Agente');
 
+
 //GET /api/agentes
 //Devuelve una lista de agentes
 /*router.get('/', async (req, res, next) => {
@@ -26,12 +27,28 @@ router.get('/', async (req, res, next) => {
     //modelo, en vel del método normal.
     //const agentes = await Agente.find();
 
+    //ejemplo de petición de un campo sin id
+    //http://localhost:3000/api/agentes/?fields=-_id
+
+    //filtros
     filtro={};
     const name=req.query.name;
     const age=req.query.age;
+
+    //paginación
+    const skip=req.query.skip;
+    const limit=req.query.limit;
+
+    //selección de campos
+    const fields=req.query.fields;
+
+    //orden
+    const sort=req.query.sort;
+
+
     if (name) {filtro.name=name}
     if (age) {filtro.age=age}
-    const agentes = await Agente.lista(filtro);
+    const agentes = await Agente.lista(filtro, fields, sort);
     res.json({ results: agentes });
 
   } catch (err) {

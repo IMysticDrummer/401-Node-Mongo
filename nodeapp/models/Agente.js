@@ -1,3 +1,4 @@
+const { query } = require('express');
 const mongoose=require('mongoose');
 
 //definimos el esquema
@@ -10,8 +11,14 @@ const agenteSchema = mongoose.Schema({
 
 
 //MÉTODO ESTÁTICO DEL MODELO
-agenteSchema.statics.lista=function (filtro) {
-  return Agente.find(filtro);
+agenteSchema.statics.lista=function (filtro, skip, limit,fields, sort) {
+  const query=Agente.find(filtro);
+  query.skip(skip);
+  query.limit(limit);
+  query.select(fields);
+  query.sort(sort);
+  //return Agente.find(filtro);
+  return query.exec();
 }
 
 //Método de INSTANCIA de los agentes.
