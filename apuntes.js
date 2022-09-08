@@ -17,5 +17,10 @@
 
   Esta librería no es lo más seguro del mundo y sólo
   debe utilizarse para protección básica interna y
-  cosas poco críticas
+  cosas poco críticas.
+
+
+  SCRIPT INICIALIZACIÓN BASE DE DATOS MONGO
+  Esto no es parte de la aplicación. Va a funcionar de foerma
+  autónoma, aunque esté en la misma carpeta.
  */
