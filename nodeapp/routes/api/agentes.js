@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {query, validationResult} = require('express-validator');
 const Agente=require('../../models/Agente');
+const basicAuthMiddleware=require('../../lib/basicAuthMiddleware');
 
 
 //GET /api/agentes
@@ -20,7 +21,7 @@ const Agente=require('../../models/Agente');
   res.json({results: agentes});
 });
 */
-router.get('/', async (req, res, next) => {
+router.get('/', basicAuthMiddleware, async (req, res, next) => {
   try {
 
     //Usamos un método estático creado por nosotros en el 
