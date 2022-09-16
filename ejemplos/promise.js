@@ -5,9 +5,9 @@ function sleep(ms){
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       //Para resolver (con o sin resultado)
-      //resolve(5);
+      resolve(5);
       //Para rechazar y con la razón
-      reject('error fatal');
+      //reject('error fatal');
     }, ms);
   });
 };
